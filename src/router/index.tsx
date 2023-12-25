@@ -6,6 +6,7 @@ import { observer } from "mobx-react";
 import Devices from "../pages/Devices";
 import Groups from "../pages/Groups";
 import Login from "../pages/Login";
+import Register from "../pages/Register";
 
 // // 自定义懒加载函数
 // const lazyLoad = (factory: () => Promise<any>) => {
@@ -45,6 +46,10 @@ export const Routes: IRouteObject[] = [
     element: <Login />,
   },
   {
+    path: "/register",
+    element: <Register />,
+  },
+  {
     path: "*",
     // element: <NotFound />,
   },
@@ -52,7 +57,6 @@ export const Routes: IRouteObject[] = [
 
 const Router: React.FC = () => {
   groupsStore.groups.forEach((devices, key) => {
-    
     Routes.at(0)
       ?.children?.at(1)
       ?.children?.push({
