@@ -14,11 +14,14 @@ export default () => {
   const { token } = theme.useToken();
 
   return (
+    <div style={{ position: 'absolute',
+    top: '35%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',}}>
     <ProConfigProvider hashed={false}>
       <div style={{ backgroundColor: token.colorBgContainer }}>
         <LoginForm
           title="用户登录"
-          subTitle="输入用户名和密码进行登录"
         >
           <Tabs
             centered
@@ -67,5 +70,6 @@ export default () => {
         </LoginForm>
       </div>
     </ProConfigProvider>
+    </div>
   );
 };

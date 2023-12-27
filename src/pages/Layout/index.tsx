@@ -27,7 +27,7 @@ function getItem(
 
 const getGroups = (): MenuItem[] => {
   return Array.from(groupsStore.groups).map((value, _) =>
-    getItem("群组" + value[0], "/groups/" + value[0])
+    getItem("组" + value[0], "/groups/" + value[0])
   );
 };
 
@@ -42,7 +42,7 @@ const App: React.FC = observer(() => {
   autorun(() => {
     items.replace([
       getItem("设备", "/devices", <AndroidOutlined />),
-      getItem("群组", "/groups", <AppstoreOutlined />, getGroups()),
+      getItem("分组", "/groups", <AppstoreOutlined />, getGroups()),
     ]);
   });
 
@@ -71,6 +71,7 @@ const App: React.FC = observer(() => {
       <Layout>
         <Header style={{ padding: 0, background: colorBgContainer }}>
           <Flex justify="flex-end" align="center" gap="middle" style={{margin:10}}>
+            <Button type="default" size="large" onClick={()=>groupsStore.clearGroup()}>清除分组</Button>
             <Button type="default" size="large" onClick={()=>navigate('/login')}>登录</Button>
             <Button type="primary" size="large" onClick={()=>navigate('/register')}>注册</Button>
           </Flex>

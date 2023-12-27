@@ -12,9 +12,14 @@ export class UserStore {
     const msg = this.authInput(username, password);
     if (!msg) return msg;
 
-    const res = await reqRegister(user);
-    const result = res?.data;
-    // !TODO
+    try {
+      const res = await reqRegister(user);
+      const result = res?.data;
+      console.log(result);
+    } catch (e) {
+      console.error(e)
+    }
+
     return null;
   }
 

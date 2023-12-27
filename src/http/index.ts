@@ -2,6 +2,7 @@ import axios from "axios";
 import { UserType } from "../types/User";
 
 export default function ajax(url = "", data: any = {}, type = "GET") {
+  url = "/api" + url
   if (type === "GET") {
     let queryStr = "";
     for (let key in data) {
@@ -18,7 +19,6 @@ export default function ajax(url = "", data: any = {}, type = "GET") {
 
 export const reqRegister = (user: UserType) => ajax("/register", user, "POST");
 
-export const reqLogin = (user:UserType) =>
+export const reqLogin = (user: UserType) => ajax("/login", user, "POST");
 
-  ajax("/login", user, "POST");
 export const reqUpdate = (user: UserType) => ajax("/update", user, "POST");

@@ -26,6 +26,10 @@ export class DeviceStore {
     }
     this.deviceList[index].group = group;
   }
+
+  sendMsg(device:DeviceType,event:string,msg:string) {
+    console.log(`Device ${device.label} send ${event}: ${msg}`)
+  }
 }
 
 export default new DeviceStore();
