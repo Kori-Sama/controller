@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { AndroidOutlined, AppstoreOutlined } from "@ant-design/icons";
+import {
+  AndroidOutlined,
+  AppstoreOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Breadcrumb, Flex, Layout, Menu, theme } from "antd";
 import { Outlet, useNavigate } from "react-router-dom";
@@ -7,6 +11,7 @@ import groupsStore from "../../store/groups";
 import { autorun, observable } from "mobx";
 import { observer } from "mobx-react";
 import { Button } from "antd";
+import userStore from "../../store/users";
 const { Header, Content, Sider } = Layout;
 
 type MenuItem = Required<MenuProps>["items"][number];
@@ -32,18 +37,22 @@ const getGroups = (): MenuItem[] => {
 };
 
 const App: React.FC = observer(() => {
-
   let items = observable([
     getItem("设备", "/devices", <AndroidOutlined />),
     getItem("群组", "/groups", <AppstoreOutlined />, getGroups()),
   ]);
 
-
   autorun(() => {
-    items.replace([
-      getItem("设备", "/devices", <AndroidOutlined />),
-      getItem("分组", "/groups", <AppstoreOutlined />, getGroups()),
-    ]);
+    userStore.isAdmin
+      ? items.replace([
+          getItem("设备", "/devices", <AndroidOutlined />),
+          getItem("用户", "/users", <UserOutlined />),
+          getItem("分组", "/groups", <AppstoreOutlined />, getGroups()),
+        ])
+      : items.replace([
+          getItem("设备", "/devices", <AndroidOutlined />),
+          getItem("分组", "/groups", <AppstoreOutlined />, getGroups()),
+        ]);
   });
 
   const navigate = useNavigate();
@@ -70,10 +79,26 @@ const App: React.FC = observer(() => {
       </Sider>
       <Layout>
         <Header style={{ padding: 0, background: colorBgContainer }}>
-          <Flex justify="flex-end" align="center" gap="middle" style={{margin:10}}>
-            <Button type="default" size="large" onClick={()=>groupsStore.clearGroup()}>清除分组</Button>
-            <Button type="default" size="large" onClick={()=>navigate('/login')}>登录</Button>
-            <Button type="primary" size="large" onClick={()=>navigate('/register')}>注册</Button>
+          <Flex
+            justify="flex-end"
+            align="center"
+            gap="middle"
+            style={{ margin: 10 }}
+          >
+            <Button
+              type="default"
+              size="large"
+              onClick={() => groupsStore.clearGroup()}
+            >
+              清除分组
+            </Button>
+            <Button
+              type="primary"
+              size="large"
+              onClick={() => navigate("/login")}
+            >
+              登录
+            </Button>
           </Flex>
         </Header>
         <Content style={{ margin: "0 16px" }}>

@@ -1,40 +1,55 @@
-import { makeAutoObservable } from "mobx";
+import { action, makeAutoObservable } from "mobx";
 import { UserType } from "../types/User";
-import { reqRegister } from "../http";
-
 export class UserStore {
+  isLogin = false;
+  isAdmin = false;
+  users = [] as UserType[];
+
   constructor() {
     makeAutoObservable(this);
   }
-  async register(user: UserType): Promise<string | null> {
-    const { username, password } = user;
 
-    const msg = this.authInput(username, password);
-    if (!msg) return msg;
-
-    try {
-      const res = await reqRegister(user);
-      const result = res?.data;
-      console.log(result);
-    } catch (e) {
-      console.error(e)
-    }
-
-    return null;
+  @action
+  addUser(user: UserType) {
+    this.users.push(user);
   }
 
-  private authInput(username: string, password: string): string | null {
-    if (!username) {
-      return "用户名不能为空";
-    }
-    if (!password) {
-      return "密码不能为空";
-    }
-    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8, }$/;
-    if (!regex.test(password)) {
-      return "密码至少八个字符，至少一个字母和一个数字";
-    }
+  @action
+  deleteUser(user: UserType) {
+    const index = this.users.indexOf(user);
+    this.users.splice(index, 1);
+  }
+
+  @action
+  modifyUser(user: UserType, newUser: UserType) {
+    this.users = this.users.map((item) => {
+      if (item === user) {
+        return newUser;
+      } else {
+        return item;
+      }
+    });
+  }
+
+  async reqLogin({ username, password }: UserType): Promise<string | null> {
+    console.log(username, password);
+    this.authAdmin({ username, password });
+
+    this.setLogin(true);
     return null;
+  }
+  private authAdmin({ username, password }: UserType) {
+    if (username === "admin" && password === "123") {
+      this.setAdmin(true);
+    }
+  }
+  @action
+  private setLogin(value: boolean) {
+    this.isLogin = value;
+  }
+  @action
+  private setAdmin(value: boolean) {
+    this.isAdmin = value;
   }
 }
 

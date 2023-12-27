@@ -6,7 +6,8 @@ import { observer } from "mobx-react";
 import Devices from "../pages/Devices";
 import Groups from "../pages/Groups";
 import Login from "../pages/Login";
-import Register from "../pages/Register";
+import Users from "../pages/Users";
+import AuthLogin from "../components/Auth";
 
 // // 自定义懒加载函数
 // const lazyLoad = (factory: () => Promise<any>) => {
@@ -27,7 +28,11 @@ export interface IRouteObject {
 export const Routes: IRouteObject[] = [
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <AuthLogin>
+        <Layout />
+      </AuthLogin>
+    ),
     children: [
       {
         index: true,
@@ -39,16 +44,17 @@ export const Routes: IRouteObject[] = [
         element: <Groups />,
         children: [],
       },
+      {
+        path: "/users",
+        element: <Users />,
+      },
     ],
   },
   {
     path: "/login",
     element: <Login />,
   },
-  {
-    path: "/register",
-    element: <Register />,
-  },
+
   {
     path: "*",
     // element: <NotFound />,
