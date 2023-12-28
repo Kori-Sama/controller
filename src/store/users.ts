@@ -54,7 +54,11 @@ export class UserStore {
     const data = sessionStorage.getItem("token");
     if (data === null) return false;
     const { username, token } = JSON.parse(data);
-    if (username === "admin") this.setAdmin(true);
+    if (username === "admin") {
+      this.setAdmin(true);
+    } else {
+      this.setAdmin(false);
+    }
     if (token === "") return false;
     return true;
   }
