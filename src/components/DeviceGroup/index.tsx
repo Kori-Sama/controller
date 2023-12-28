@@ -33,11 +33,18 @@ const DeviceGroup = ({ devices }: DevicesProp) => {
         <Button type="primary" onClick={() => handleDelete()}>
           删除该组
         </Button>
-        <Button type="primary" onClick={()=>groupStore.sendMsgGroup(groupName!,"group-event","hello world")}>Action</Button>
+        <Button
+          type="primary"
+          onClick={() =>
+            groupStore.sendMsgGroup(groupName!, "group-event", "hello world")
+          }
+        >
+          Action
+        </Button>
         <Button type="primary">操作3</Button>
       </Flex>
-      {list.map((item) => (
-        <DeviceItem device={item} />
+      {list.map((item, index) => (
+        <DeviceItem key={index} device={item} />
       ))}
     </>
   );

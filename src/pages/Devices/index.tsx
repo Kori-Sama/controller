@@ -6,9 +6,9 @@ const Devices = () => {
   const list = devicesStore.deviceList; 
   // console.log(list)
   return (<>
-  {list.map(item=>{
+  {list.map((item,index)=>{
     // console.log("Devices:",item)
-    return <DeviceItem  device={item}/>
+    return <DeviceItem key={index} device={item}/>
   })}
   </>);
 };

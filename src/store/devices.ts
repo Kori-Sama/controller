@@ -1,4 +1,4 @@
-import { action, makeAutoObservable } from "mobx";
+import { makeAutoObservable } from "mobx";
 import { DeviceType } from "../types/Device";
 
 export class DeviceStore {
@@ -15,7 +15,6 @@ export class DeviceStore {
     this.deviceList.push(device);
   }
 
-  @action
   changeGroup(device: DeviceType, group: string | null) {
     // console.log(this.deviceList[1],"|",device)
     // console.log(device)

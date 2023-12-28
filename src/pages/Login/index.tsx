@@ -54,8 +54,7 @@ export default () => {
                 fieldProps={{
                   size: "large",
                   prefix: <LockOutlined className={"prefixIcon"} />,
-                  strengthText:
-                    "Password should contain numbers, letters and special characters, at least 8 characters long.",
+ 
                 }}
                 placeholder="密码"
                 rules={[

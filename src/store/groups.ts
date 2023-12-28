@@ -1,4 +1,4 @@
-import { action, makeAutoObservable } from "mobx";
+import { makeAutoObservable } from "mobx";
 import { DeviceType } from "../types/Device";
 import deviceStore from "./devices";
 
@@ -33,7 +33,6 @@ export class GroupStore {
     this.saveOnLocal();
   }
 
-  @action
   deleteGroup(group: string | null) {
     if (group === null) {
       return;
@@ -44,7 +43,6 @@ export class GroupStore {
     this.groups.delete(group);
     this.saveOnLocal();
   }
-  @action
   deleteDevice(device: DeviceType) {
     const index = this.groups.get(device.group!)?.indexOf(device);
     this.groups.get(device.group!)?.splice(index!);
@@ -76,7 +74,6 @@ export class GroupStore {
     // console.log(obj)
     return new Map<string, DeviceType[]>(Object.entries(obj));
   }
-  @action
   clearGroup() {
     this.groups.clear();
     window.localStorage.removeItem("groupInfo");

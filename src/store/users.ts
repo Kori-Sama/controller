@@ -1,26 +1,23 @@
-import { action, makeAutoObservable } from "mobx";
+import { makeAutoObservable } from "mobx";
 import { UserType } from "../types/User";
 export class UserStore {
-  isLogin = false;
   isAdmin = false;
-  users = [] as UserType[];
+  users = new Array<UserType>();
+  username = "";
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  @action
   addUser(user: UserType) {
     this.users.push(user);
   }
 
-  @action
   deleteUser(user: UserType) {
     const index = this.users.indexOf(user);
     this.users.splice(index, 1);
   }
 
-  @action
   modifyUser(user: UserType, newUser: UserType) {
     this.users = this.users.map((item) => {
       if (item === user) {
@@ -32,10 +29,13 @@ export class UserStore {
   }
 
   async reqLogin({ username, password }: UserType): Promise<string | null> {
-    console.log(username, password);
+    console.log("username:", username, "    ", "password:", password);
+    const res = "fake token";
     this.authAdmin({ username, password });
-
-    this.setLogin(true);
+    this.setToken({
+      username,
+      token: res,
+    });
     return null;
   }
   private authAdmin({ username, password }: UserType) {
@@ -43,13 +43,20 @@ export class UserStore {
       this.setAdmin(true);
     }
   }
-  @action
-  private setLogin(value: boolean) {
-    this.isLogin = value;
-  }
-  @action
+
   private setAdmin(value: boolean) {
     this.isAdmin = value;
+  }
+  private setToken(token: { username: string; token: string }) {
+    sessionStorage["token"] = JSON.stringify(token);
+  }
+  loadToken(): boolean {
+    const data = sessionStorage.getItem("token");
+    if (data === null) return false;
+    const { username, token } = JSON.parse(data);
+    if (username === "admin") this.setAdmin(true);
+    if (token === "") return false;
+    return true;
   }
 }
 
