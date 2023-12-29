@@ -3,7 +3,7 @@ import userStore from "../../store/users";
 import UserItem from "../../components/UserItem";
 import { useState } from "react";
 
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { LockOutlined, UserOutlined ,UserAddOutlined} from "@ant-design/icons";
 import { observer } from "mobx-react";
 
 const Users = () => {
@@ -52,7 +52,8 @@ const Users = () => {
         />
       </Modal>
       <Flex gap={20}>
-        <Button type="primary" onClick={showModal}>
+        <Button type="primary" onClick={showModal} style={{marginBottom:20}}>
+          <UserAddOutlined/>
           新增用户
         </Button>
       </Flex>

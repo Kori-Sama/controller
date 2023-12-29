@@ -2,18 +2,18 @@ import { Button, Collapse, Flex, Input, Modal } from "antd";
 import { UserType } from "../../types/User";
 import { observer } from "mobx-react";
 import userStore from "../../store/users";
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { LockOutlined, UserOutlined,UserDeleteOutlined,UserSwitchOutlined } from "@ant-design/icons";
 import { useState } from "react";
 
 const UserItem = ({ user, index }: { user: UserType; index: number }) => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const showModal = () => {
     setIsModalOpen(true);
   };
   const handleOk = () => {
-    userStore.modifyUser(user,{ username, password });
+    userStore.modifyUser(user, { username, password });
     setIsModalOpen(false);
     setUsername("");
     setPassword("");
@@ -55,22 +55,37 @@ const UserItem = ({ user, index }: { user: UserType; index: number }) => {
         items={[
           {
             key: "1",
-            label: `${index}. 用户名: ${user.username} 密码: ${user.password}`,
+            label: <UserShow user={user} index={index} />,
             children: (
               <Flex gap={40}>
                 <Button
                   type="primary"
                   onClick={() => userStore.deleteUser(user)}
                 >
+                  <UserDeleteOutlined/>
                   删除用户
                 </Button>
-                <Button type="primary" onClick={showModal}>修改用户</Button>
+                <Button type="primary" onClick={showModal}>
+                  <UserSwitchOutlined/>
+                  修改用户
+                </Button>
               </Flex>
             ),
           },
         ]}
       ></Collapse>
     </>
+  );
+};
+
+const UserShow = ({ user,index }: { user: UserType,index:number }) => {
+  return (
+    <Flex gap={20} justify="flex-start" align="center">
+      <UserOutlined />
+      <div>{index}.</div>
+      <div>用户名: {user.username}</div>
+      <div>密码: {user.password}</div>
+    </Flex>
   );
 };
 

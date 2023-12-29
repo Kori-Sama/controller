@@ -2,9 +2,11 @@ import { Collapse, Flex } from "antd";
 import DeviceController from "../DeviceController";
 import { DeviceProp } from "../../types/Device";
 import { observer } from "mobx-react";
+import DataShow from "../DataShow";
 
 const DeviceItem = ({device}: DeviceProp) => {
   // console.log("DeviceItem:",device)
+
   return (
     <>
       <Flex gap="middle" justify="flex-start" align="center">
@@ -12,7 +14,7 @@ const DeviceItem = ({device}: DeviceProp) => {
           size="large"
           style={{ width: 1200 }}
           items={[
-            { label: device.label, children: <DeviceController device={device} /> },
+            { label:<DataShow device={device}/>, children: <DeviceController device={device} /> },
           ]}
         />
         {/* <Badge status={status ? "success" : "error"} /> */}

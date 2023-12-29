@@ -46,8 +46,8 @@ const App: React.FC = observer(() => {
     userStore.isAdmin
       ? items.replace([
           getItem("设备", "/devices", <AndroidOutlined />),
-          getItem("用户", "/users", <UserOutlined />),
           getItem("分组", "/groups", <AppstoreOutlined />, getGroups()),
+          getItem("用户", "/users", <UserOutlined />),
         ])
       : items.replace([
           getItem("设备", "/devices", <AndroidOutlined />),

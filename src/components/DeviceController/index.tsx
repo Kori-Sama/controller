@@ -1,9 +1,8 @@
 import { Button, Dropdown, Flex, Input, MenuProps, Modal, Space, message } from "antd";
 import { DeviceProp } from "../../types/Device";
 import groupsStore from "../../store/groups";
-import { AppstoreOutlined,DownOutlined } from "@ant-design/icons";
+import { AppstoreOutlined,DownOutlined ,AppstoreAddOutlined,DeleteOutlined} from "@ant-design/icons";
 import { useState } from "react";
-import DataShow from "../DataShow";
 import deviceStore from "../../store/devices";
 import { observer } from "mobx-react";
 import { observable } from "mobx";
@@ -57,7 +56,6 @@ const DeviceController = ({ device }: DeviceProp) => {
   return (
     <>
       {contextHolder}
-      <DataShow device={device} />
       <Modal
         title="创建组"
         open={isModalOpen}
@@ -76,14 +74,15 @@ const DeviceController = ({ device }: DeviceProp) => {
       <Flex justify="space-around" align="center" gap="middle">
                <Dropdown menu={{ items }}>
           <a onClick={(e) => e.preventDefault()}>
-            <Space>
+            <Space><AppstoreAddOutlined />
               加入
               <DownOutlined />
             </Space>
           </a>
         </Dropdown>
         <Button type="primary" onClick={() => handleDelete()}>
-          从本组删去
+          <DeleteOutlined />
+          组中删去
         </Button>
         <Button
           type="primary"

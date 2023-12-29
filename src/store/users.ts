@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { UserType } from "../types/User";
+import socket from "../socket";
 export class UserStore {
   isAdmin = false;
   users = new Array<UserType>();
@@ -30,7 +31,11 @@ export class UserStore {
 
   async reqLogin({ username, password }: UserType): Promise<string | null> {
     console.log("username:", username, "    ", "password:", password);
-    const res = "fake token";
+    // socket.emit("login", JSON.stringify({ username, password }));
+    let res = "fake token";
+    // socket.on("login", (data) => {
+    //   res = data;
+    // });
     this.authAdmin({ username, password });
     this.setToken({
       username,
