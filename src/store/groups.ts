@@ -51,10 +51,10 @@ export class GroupStore {
     this.saveOnLocal();
   }
 
-  sendMsgGroup(group: string, event: string, msg: string) {
+  sendMsgGroup(group: string,action:string ,args: {}) {
     if (this.groups.has(group)) {
       this.groups.get(group)?.forEach((item) => {
-        deviceStore.sendMsg(item, event, msg);
+        deviceStore.sendMsg(item,action,args);
       });
     }
   }

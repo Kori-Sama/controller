@@ -1,5 +1,8 @@
 import { makeAutoObservable } from "mobx";
 import { DeviceType } from "../types/Device";
+import socket from "../socket";
+import KEYS from "../types/SocketAPI";
+import userStore from "./users";
 
 export class DeviceStore {
   deviceList: DeviceType[] = [];
@@ -23,10 +26,18 @@ export class DeviceStore {
     this.deviceList[index].group = group;
   }
 
-  sendMsg(device:DeviceType,event:string,msg:string) {
-    console.log(`Device ${device.label} send ${event}: ${msg}`)
-  }
+  sendMsg(device: DeviceType, action: string, args: object) {
+    let jsonObject: any = {};
+    jsonObject[KEYS.DEVID] = device.label;
+    jsonObject[KEYS.ACTION_NAME] = action;
+    jsonObject[KEYS.ACTION_ARGS] = args;
+    jsonObject[KEYS.USERNAME] = userStore.username;
+    jsonObject[KEYS.PASSWORD] = "";
 
+    console.log(`${device.label} send: ${action} with: `,jsonObject)
+
+    socket.emit(KEYS.EVENT_CONTROLLER_ACTIONS, JSON.stringify(jsonObject));
+  }
 }
 
 export default new DeviceStore();

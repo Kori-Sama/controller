@@ -1,0 +1,63 @@
+const KEYS = {
+  KSTR_UNKNOWN: "unknown",
+
+  DEVID: "devid",
+  STATUS: "status",
+  STATUS_ONLINE: "online",
+  STATUS_OFFLINE: "offline",
+  STATUS_HALT: "halt",
+  STATUS_REBOOT: "rebooting",
+  STATUS_WIPE: "wiping",
+  USERDATA_DRIVER: "userdata_driver",
+  USERDATA_AREA: "userdata_area",
+  LBA_SIZE: "lba_size",
+  DATA_LBA_SIZE: "data_lba_size",
+  DATA_SIZE_BYTES: "data_size_bytes",
+  DATA_NUMBER: "data_number",
+  SYS_NUMBER: "sys_number",
+  SYS_INDEX: "sys_index",
+  USERNAME: "username",
+  PASSWORD: "password",
+  OWNED_GROUPS: "own_groups",
+  BELONG_GROUPS: "belong_groups",
+  SYSTEM_LIST: "system_list",
+  PERMISSION: "permission",
+  PERMISSION_ADMIN: "admin",
+  PERMISSION_COMMON: "common",
+
+  EVENT_REGITS_SYSTEM: "register_system",
+  EVENT_REGITS_DEVICE: "register_device",
+  EVENT_ADD_SYSTEM: "add_system",
+  EVENT_SERVER: "server",
+  EVENT_CLIENT: "client",
+  EVENT_REGIST_USER: "register_user",
+  EVENT_LOGIN: "login",
+  EVENT_CONTROLLER_ACTIONS: "controller_actions",
+  EVENT_UPDATE_CONTROLLER_DATA: "update_controller_data",
+  EVENT_CLIENT_ACTIONS: "client_actions",
+  EVENT_ADMIN_ACTIONS: "admin_actions",
+  EVENT_DEVICE_MESSAGE: "device_message",
+
+  ACTION_NAME: "action_name",
+  ACTION_ARGS: "action_args",
+
+  // device
+  ACTION_REBOOT: "reboot",
+  ACTION_SHUTDOWN: "shutdown",
+  ACTION_WIPE: "wipe",
+  ACTION_MOVE: "move",
+  ACTION_MOVE_STARTLBA: "move_startLBA",
+  ACTION_MOVE_ENDLBA: "move_endLBA",
+  ACTION_WIPE_STARTLBA: "wipe_startLBA",
+  ACTION_WIPE_ENDLBA: "wipe_endLBA",
+  ACTION_WIPE_DRIVER: "wipe_driver",
+  KEY_SERVER_RETURN_CODE: "server_return_code",
+
+  // login related
+  KEY_LOGIN_RESULT: "login_result",
+  VALUE_LOGIN_RESULT_SUCCESS: "success",
+  VALUE_LOGIN_RESULT_FAIL: "fail",
+  VALUE_LOGIN_PRIVACY_FAIL: "privacy_fail",
+};
+
+export default KEYS;

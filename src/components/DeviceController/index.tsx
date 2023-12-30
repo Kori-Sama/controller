@@ -1,11 +1,26 @@
-import { Button, Dropdown, Flex, Input, MenuProps, Modal, Space, message } from "antd";
+import {
+  Button,
+  Dropdown,
+  Flex,
+  Input,
+  MenuProps,
+  Modal,
+  Space,
+  message,
+} from "antd";
 import { DeviceProp } from "../../types/Device";
 import groupsStore from "../../store/groups";
-import { AppstoreOutlined,DownOutlined ,AppstoreAddOutlined,DeleteOutlined} from "@ant-design/icons";
+import {
+  AppstoreOutlined,
+  DownOutlined,
+  AppstoreAddOutlined,
+  DeleteOutlined,
+} from "@ant-design/icons";
 import { useState } from "react";
 import deviceStore from "../../store/devices";
 import { observer } from "mobx-react";
 import { observable } from "mobx";
+import KEYS from "../../types/SocketAPI";
 
 const DeviceController = ({ device }: DeviceProp) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -71,10 +86,11 @@ const DeviceController = ({ device }: DeviceProp) => {
           value={groupName}
         />
       </Modal>
-      <Flex justify="space-around" align="center" gap="middle">
-               <Dropdown menu={{ items }}>
+      <Flex justify="space-around" align="center" gap={10}>
+        <Dropdown menu={{ items }}>
           <a onClick={(e) => e.preventDefault()}>
-            <Space><AppstoreAddOutlined />
+            <Space>
+              <AppstoreAddOutlined />
               加入
               <DownOutlined />
             </Space>
@@ -86,9 +102,15 @@ const DeviceController = ({ device }: DeviceProp) => {
         </Button>
         <Button
           type="primary"
-          onClick={() => deviceStore.sendMsg(device, "Event", "hello world")}
+          onClick={() => deviceStore.sendMsg(device, KEYS.ACTION_REBOOT, {})}
         >
-          Action
+          重启
+        </Button>
+        <Button
+          type="primary"
+          onClick={() => deviceStore.sendMsg(device, KEYS.ACTION_SHUTDOWN, {})}
+        >
+          关机
         </Button>
       </Flex>
     </>

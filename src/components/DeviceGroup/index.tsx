@@ -4,9 +4,15 @@ import DeviceItem from "../DeviceItem";
 import { Button, Flex } from "antd";
 import groupStore from "../../store/groups";
 import { useNavigate } from "react-router-dom";
+import KEYS from "../../types/SocketAPI";
 
-
-const DeviceGroup = ({ devices,groupName }:{devices:DeviceType[],groupName:string|null}) => {
+const DeviceGroup = ({
+  devices,
+  groupName,
+}: {
+  devices: DeviceType[];
+  groupName: string | null;
+}) => {
   const navigate = useNavigate();
   const list = devices;
 
@@ -29,12 +35,19 @@ const DeviceGroup = ({ devices,groupName }:{devices:DeviceType[],groupName:strin
         <Button
           type="primary"
           onClick={() =>
-            groupStore.sendMsgGroup(groupName!, "group-event", "hello world")
+            groupStore.sendMsgGroup(groupName!, KEYS.ACTION_REBOOT, {})
           }
         >
-          Action
+          重启
         </Button>
-        <Button type="primary">操作3</Button>
+        <Button
+          type="primary"
+          onClick={() =>
+            groupStore.sendMsgGroup(groupName!, KEYS.ACTION_SHUTDOWN, {})
+          }
+        >
+          关机
+        </Button>
       </Flex>
       {list.map((item, index) => (
         <DeviceItem key={index} device={item} />
