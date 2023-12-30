@@ -31,11 +31,11 @@ export class UserStore {
 
   async reqLogin({ username, password }: UserType): Promise<string | null> {
     console.log("username:", username, "    ", "password:", password);
-    // socket.emit("login", JSON.stringify({ username, password }));
-    let res = "fake token";
-    // socket.on("login", (data) => {
-    //   res = data;
-    // });
+    socket.emit("login", JSON.stringify({ username, password }));
+    let res = "";
+    socket.on("login", (data) => {
+      res = data;
+    });
     this.authAdmin({ username, password });
     this.setToken({
       username,

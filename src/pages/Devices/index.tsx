@@ -4,7 +4,8 @@ import devicesStore from "../../store/devices";
 
 const Devices = () => {
   const list = devicesStore.deviceList; 
-  // console.log(list)
+
+  // console.log(list.map(item=>item.group))
   return (<>
   {list.map((item,index)=>{
     // console.log("Devices:",item)

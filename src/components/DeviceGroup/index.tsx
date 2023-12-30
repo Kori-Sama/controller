@@ -5,17 +5,10 @@ import { Button, Flex } from "antd";
 import groupStore from "../../store/groups";
 import { useNavigate } from "react-router-dom";
 
-interface DevicesProp {
-  devices: DeviceType[];
-}
 
-const DeviceGroup = ({ devices }: DevicesProp) => {
+const DeviceGroup = ({ devices,groupName }:{devices:DeviceType[],groupName:string|null}) => {
   const navigate = useNavigate();
   const list = devices;
-  let groupName: string | null;
-  if (devices.length !== 0) {
-    groupName = devices[0].group;
-  }
 
   const handleDelete = () => {
     groupStore.deleteGroup(groupName);

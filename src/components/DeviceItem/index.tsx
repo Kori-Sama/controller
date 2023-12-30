@@ -5,7 +5,7 @@ import { observer } from "mobx-react";
 import DataShow from "../DataShow";
 
 const DeviceItem = ({device}: DeviceProp) => {
-  // console.log("DeviceItem:",device)
+  // console.log("DeviceItem:",device.group)
 
   return (
     <>

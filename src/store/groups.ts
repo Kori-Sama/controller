@@ -37,6 +37,7 @@ export class GroupStore {
     if (group === null) {
       return;
     }
+    console.log("delete succeed");
     this.groups
       .get(group)
       ?.forEach((item) => deviceStore.changeGroup(item, null));
@@ -70,9 +71,8 @@ export class GroupStore {
     if (json === null) {
       return new Map<string, DeviceType[]>();
     }
-    const obj = JSON.parse(json);
-    // console.log(obj)
-    return new Map<string, DeviceType[]>(Object.entries(obj));
+    const map = new Map<string, DeviceType[]>(Object.entries(JSON.parse(json)));
+    return map;
   }
   clearGroup() {
     this.groups.clear();

@@ -16,10 +16,7 @@ export class DeviceStore {
   }
 
   changeGroup(device: DeviceType, group: string | null) {
-    // console.log(this.deviceList[1],"|",device)
-    // console.log(device)
     const index = this.deviceList.indexOf(device);
-    // console.log(index)
     if (index === -1) {
       return;
     }
@@ -29,6 +26,7 @@ export class DeviceStore {
   sendMsg(device:DeviceType,event:string,msg:string) {
     console.log(`Device ${device.label} send ${event}: ${msg}`)
   }
+
 }
 
 export default new DeviceStore();
