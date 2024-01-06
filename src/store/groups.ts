@@ -3,80 +3,34 @@ import { DeviceType } from "../types/Device";
 import deviceStore from "./devices";
 
 export class GroupStore {
-  groups: Map<string, DeviceType[]>;
+  groups: Map<string, DeviceType[]> = new Map();
+
   constructor() {
     makeAutoObservable(this);
-    this.groups = this.loadOnLocal();
   }
 
-  addToGroup(group: string, device: DeviceType) {
-    // console.log(device.group)
-    // console.log(device.group)
-    if (device.group !== null) {
-      // console.log("start");
-      // console.log(device.group)
-      const index = this.groups.get(device.group)?.indexOf(device);
-      this.groups.get(device.group)?.splice(index!);
-      // console.log(this.groups.get(device.group));
-      // console.log("end");
+  initGroups(devices: DeviceType[] = deviceStore.deviceList) {
+    devices.forEach((device) => {
+      device.belong_groups.forEach((group) => {
+        this.addGroup(group, device);
+      });
+    });
+  }
+
+  addGroup(group: string, device: DeviceType) {
+    if (!this.groups.has(group)) {
+      this.groups.set(group, []);
     }
-
-    deviceStore.changeGroup(device, group);
-
-    if (this.groups.has(group)) {
-      this.groups.get(group)?.push(device);
-    } else {
-      let devices: DeviceType[] = [device];
-      this.groups.set(group, devices);
-    }
-    // console.log("store:",device)
-    this.saveOnLocal();
+    this.groups.get(group)?.push(device);
   }
 
-  deleteGroup(group: string | null) {
-    if (group === null) {
-      return;
-    }
-    console.log("delete succeed");
-    this.groups
-      .get(group)
-      ?.forEach((item) => deviceStore.changeGroup(item, null));
-    this.groups.delete(group);
-    this.saveOnLocal();
-  }
-  deleteDevice(device: DeviceType) {
-    const index = this.groups.get(device.group!)?.indexOf(device);
-    this.groups.get(device.group!)?.splice(index!);
-    deviceStore.changeGroup(device, null);
-    this.saveOnLocal();
-  }
-
-  sendMsgGroup(group: string,action:string ,args: {}) {
+  sendMsgGroup(group: string | null, action: string, args: {}) {
+    if (group === null) return;
     if (this.groups.has(group)) {
       this.groups.get(group)?.forEach((item) => {
-        deviceStore.sendMsg(item,action,args);
+        deviceStore.sendMsg(item, action, args);
       });
     }
-  }
-
-  saveOnLocal() {
-    const data = Object.fromEntries(this.groups.entries());
-    window.localStorage.removeItem("groupInfo");
-    // console.log(data)
-    window.localStorage.setItem("groupInfo", JSON.stringify(data));
-  }
-
-  loadOnLocal() {
-    const json = window.localStorage.getItem("groupInfo");
-    if (json === null) {
-      return new Map<string, DeviceType[]>();
-    }
-    const map = new Map<string, DeviceType[]>(Object.entries(JSON.parse(json)));
-    return map;
-  }
-  clearGroup() {
-    this.groups.clear();
-    window.localStorage.removeItem("groupInfo");
   }
 }
 

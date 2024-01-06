@@ -67,7 +67,7 @@ const Router: React.FC = () => {
       ?.children?.at(1)
       ?.children?.push({
         path: "/groups/" + key,
-        element: <DeviceGroup devices={devices} groupName={devices[0]?.group}/>,
+        element: <DeviceGroup devices={devices} groupName={key}/>,
       });
     // console.log("Root", Routes.at(0));
     // console.log("children:", Routes.at(0)?.children?.at(1)?.children);

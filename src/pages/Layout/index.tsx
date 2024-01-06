@@ -86,13 +86,6 @@ const App: React.FC = observer(() => {
             style={{ margin: 10 }}
           >
             <Button
-              type="default"
-              size="large"
-              onClick={() => groupsStore.clearGroup()}
-            >
-              清除分组
-            </Button>
-            <Button
               type="primary"
               size="large"
               onClick={() => navigate("/login")}

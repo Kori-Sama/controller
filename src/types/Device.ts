@@ -1,9 +1,14 @@
 export interface DeviceType {
-  code: string;
-  status: boolean;
-  group: string | null;
-  key: string;
-  label: string;
+    id: string;
+    status: string;
+    userdata_driver: string;
+    userdata_area: string;
+    lba_size: string;
+    data_lba_size: string;
+    data_number: number;
+    sys_index: number;
+    system_list: { [key: string]: number[] };
+    belong_groups: string[],
 }
 
 export interface DeviceProp {

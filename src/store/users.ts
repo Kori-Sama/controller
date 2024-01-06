@@ -25,17 +25,13 @@ export class UserStore {
 
   deleteUser(user: UserType) {
     const index = this.users.indexOf(user);
-    this.users.splice(index, 1);
+    if (index !== -1) {
+      this.users.splice(index, 1);
+    }
   }
 
   modifyUser(user: UserType, newUser: UserType) {
-    this.users = this.users.map((item) => {
-      if (item === user) {
-        return newUser;
-      } else {
-        return item;
-      }
-    });
+    this.users = this.users.map((item) => (item === user ? newUser : item));
   }
 
   async reqLogin({ username, password }: UserType) {
@@ -46,10 +42,11 @@ export class UserStore {
           JSON.stringify({ username, password, token: this.token })
         );
         socket.once(KEYS.EVENT_LOGIN, (data: any) => {
-          resolve(JSON.parse(data));
+          console.log(data)
+          resolve(data);
         });
       });
-      
+
       if (res.login_result === "success") {
         this.username = username;
         // console.log(res.login_token);

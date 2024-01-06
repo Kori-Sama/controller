@@ -1,8 +1,13 @@
-import io from "socket.io-client"
+import io from "socket.io-client";
+import KEYS from "../types/SocketAPI";
+import deviceStore from "../store/devices";
 
-const url = "http://47.109.52.116:4001";
+const dev = true;
+
+const url = dev ? "http://127.0.0.1:3000" : "http://47.109.52.116:4001";
 
 const options = {
+  withCredentials: true,
   // transports: ['websocket'],
 };
 
@@ -13,19 +18,23 @@ socket.on("connect", () => {
   console.log("With id:", socket.id);
 });
 
-socket.on("connect_error", (err:any) => {
+socket.on("connect_error", (err: any) => {
   console.log("Connect error:", err);
   // socket.connect();
 });
 
-socket.on("disconnect", (reason:any) => {
+socket.on("disconnect", (reason: any) => {
   console.log("Disconnect from server");
   if (reason === "io server disconnect") {
     socket.connect();
   }
 });
 
-socket.connect()
+socket.on(KEYS.EVENT_UPDATE_CONTROLLER_DATA, (args) => {
+  console.log(args);
+  deviceStore.handleEVENT_UPDATE_CONTROLLER_DATA(args);
+});
+
+socket.connect();
 
 export default socket;
-

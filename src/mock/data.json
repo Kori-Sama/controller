@@ -1,30 +1,77 @@
 [
   {
-    "key": "1",
-    "label": "6896588",
-    "status": true,
-    "code": "200",
-    "group": null
+    "id": "device1",
+    "status": "active",
+    "userdata_driver": "driver1",
+    "userdata_area": "area1",
+    "lba_size": "1024",
+    "data_lba_size": "512",
+    "data_number": 2,
+    "sys_index": 1,
+    "system_list": {
+      "systemA": [10, 20],
+      "systemB": [30, 40]
+    },
+    "belong_groups": ["group1", "group2"]
   },
   {
-    "key": "2",
-    "label": "example",
-    "status": false,
-    "code": "200",
-    "group": null
+    "id": "device2",
+    "status": "active",
+    "userdata_driver": "driver2",
+    "userdata_area": "area2",
+    "lba_size": "1024",
+    "data_lba_size": "512",
+    "data_number": 2,
+    "sys_index": 1,
+    "system_list": {
+      "systemA": [10, 20],
+      "systemB": [30, 40]
+    },
+    "belong_groups": ["group1", "group2"]
   },
   {
-    "key": "3",
-    "label": "demo",
-    "status": true,
-    "code": "200",
-    "group": null
+    "id": "device3",
+    "status": "active",
+    "userdata_driver": "driver3",
+    "userdata_area": "area3",
+    "lba_size": "1024",
+    "data_lba_size": "512",
+    "data_number": 2,
+    "sys_index": 1,
+    "system_list": {
+      "systemA": [10, 20],
+      "systemB": [30, 40]
+    },
+    "belong_groups": ["group1", "group2"]
   },
   {
-    "key": "4",
-    "label": "sample",
-    "status": true,
-    "code": "200",
-    "group": null
+    "id": "device4",
+    "status": "active",
+    "userdata_driver": "driver4",
+    "userdata_area": "area4",
+    "lba_size": "1024",
+    "data_lba_size": "512",
+    "data_number": 2,
+    "sys_index": 1,
+    "system_list": {
+      "systemA": [10, 20],
+      "systemB": [30, 40]
+    },
+    "belong_groups": ["group1"]
+  },
+  {
+    "id": "device5",
+    "status": "active",
+    "userdata_driver": "driver5",
+    "userdata_area": "area5",
+    "lba_size": "1024",
+    "data_lba_size": "512",
+    "data_number": 2,
+    "sys_index": 1,
+    "system_list": {
+      "systemA": [10, 20],
+      "systemB": [30, 40]
+    },
+    "belong_groups": ["group1"]
   }
 ]
