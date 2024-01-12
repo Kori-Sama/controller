@@ -17,6 +17,7 @@ export class UserStore {
   constructor() {
     makeAutoObservable(this);
     this.loadToken();
+    socket.emit(KEYS.EVENT_UPDATE_CONTROLLER_DATA,JSON.stringify({ username:this.username, password:"", token: this.token }))
   }
 
   addUser(user: UserType) {
@@ -43,11 +44,16 @@ export class UserStore {
         );
         socket.once(KEYS.EVENT_LOGIN, (data: any) => {
           console.log(data)
+          data = JSON.parse(data);
           resolve(data);
         });
       });
 
-      if (res.login_result === "success") {
+      if(res.login_result === "already_login"){
+        alert("已经登录了")
+      }
+
+      if (res.login_result === KEYS.VALUE_LOGIN_RESULT_SUCCESS) {
         this.username = username;
         // console.log(res.login_token);
         this.authAdmin({ username, password });
@@ -55,6 +61,8 @@ export class UserStore {
           username,
           token: res.login_token,
         });
+
+        socket.emit(KEYS.EVENT_UPDATE_CONTROLLER_DATA,JSON.stringify({ username, password, token: this.token }))
       }
 
       resolve(null);

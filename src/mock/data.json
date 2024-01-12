@@ -1,11 +1,11 @@
 [
   {
-    "id": "device1",
+    "id": "6896588",
     "status": "active",
     "userdata_driver": "driver1",
     "userdata_area": "area1",
     "lba_size": "1024",
-    "data_lba_size": "512",
+    "data_lba_size": "42724608",
     "data_number": 2,
     "sys_index": 1,
     "system_list": {

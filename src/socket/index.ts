@@ -2,7 +2,7 @@ import io from "socket.io-client";
 import KEYS from "../types/SocketAPI";
 import deviceStore from "../store/devices";
 
-const dev = true;
+const dev = false;
 
 const url = dev ? "http://127.0.0.1:3000" : "http://47.109.52.116:4001";
 
@@ -30,8 +30,8 @@ socket.on("disconnect", (reason: any) => {
   }
 });
 
-socket.on(KEYS.EVENT_UPDATE_CONTROLLER_DATA, (args) => {
-  console.log(args);
+socket.on(KEYS.EVENT_UPDATE_CONTROLLER_DATA, (args: any) => {
+  // console.log(args);
   deviceStore.handleEVENT_UPDATE_CONTROLLER_DATA(args);
 });
 
