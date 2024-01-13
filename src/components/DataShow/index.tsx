@@ -1,7 +1,8 @@
-import { Badge, Flex } from "antd"
+import { Badge, Checkbox, Flex } from "antd"
 import { DeviceProp } from "../../types/Device"
 import { observer } from "mobx-react"
 import KEYS from "../../types/SocketAPI"
+import groupStore from "../../store/groups"
 
 const DataShow = ({ device }: DeviceProp) => {
   const {
@@ -13,6 +14,7 @@ const DataShow = ({ device }: DeviceProp) => {
     data_lba_size,
     data_number,
     sys_index,
+    automatic_status
   } = device
 
   const byte_size = Number.parseInt(data_lba_size) * Number.parseInt(lba_size)
@@ -24,15 +26,24 @@ const DataShow = ({ device }: DeviceProp) => {
       <div>驱动器: {userdata_driver}</div>
       <div>区域: {userdata_area.slice(1,userdata_area.length-1)}</div>
       <div>系统编号: {sys_index}</div>
-      <div>分区大小: {lba_size}</div>
+      <div>LBA_SIZE: {lba_size}</div>
       <Flex vertical={true}>
         数据大小:
         <div>byte: {byte_size.toString()}</div>
         <div>IEEE: {IEEE_size}</div>
       </Flex>
       <div>数据index: {data_number}</div>
+      <div>周期指令:{automatic_status}</div>
       <div>状态: {status}</div>
       <Badge status={status === KEYS.STATUS_ONLINE ? "success" : "error"} />
+      <Checkbox onChange={(e)=>{
+        const checked = e.target.checked
+        if(checked) {
+          groupStore.addGroup("selected",device)
+        }else{
+          groupStore.deleteSelected(device) 
+        }
+      }}/>
     </Flex>
   )
 }

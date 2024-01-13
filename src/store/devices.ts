@@ -28,6 +28,10 @@ export class DeviceStore {
     }
   }
 
+  changeDeviceStatus(device: DeviceType, automatic_status: string) {
+    device.automatic_status = automatic_status
+  }
+
   // changeGroup(device: DeviceType, group: string | null) {
   //   const index = this.deviceList.indexOf(device);
   //   if (index === -1) {
@@ -42,7 +46,7 @@ export class DeviceStore {
     jsonObject[KEYS.ACTION_NAME] = action
     jsonObject[KEYS.ACTION_ARGS] = args
     jsonObject[KEYS.USERNAME] = userStore.username
-    jsonObject[KEYS.PASSWORD] = ""
+    jsonObject[KEYS.PASSWORD] = userStore.password
 
     console.log(`${device.id} send: ${action} with: `, jsonObject)
 
@@ -80,6 +84,7 @@ export class DeviceStore {
       sys_index,
       system_list,
       belong_groups,
+      automatic_status: "disabled",
     }
     const index = this.deviceList.findIndex((item) => item.id === id)
     if (index === -1) {

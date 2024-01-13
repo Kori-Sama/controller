@@ -50,6 +50,8 @@ const KEYS = {
   ACTION_MOVE_ENDLBA: "move_endLBA",
   ACTION_WIPE_STARTLBA: "wipe_startLBA",
   ACTION_WIPE_ENDLBA: "wipe_endLBA",
+  ACTION_WIPE_START_BYTE:"wipe_start_byte",
+  ACTION_WIPE_END_BYTE:"wipe_end_byte",
   ACTION_WIPE_DRIVER: "wipe_driver",
   KEY_SERVER_RETURN_CODE: "server_return_code",
 
@@ -58,6 +60,11 @@ const KEYS = {
   VALUE_LOGIN_RESULT_SUCCESS: "success",
   VALUE_LOGIN_RESULT_FAIL: "fail",
   VALUE_LOGIN_PRIVACY_FAIL: "privacy_fail",
+
+  ACTION_AUTOMATIC_MOVE:"automatic_move",
+  KEY_AUTOMATIC_MOVE_PERIOD:"automatic_move_period",
+  KEY_AUTOMATIC_MOVE_SCOPE:"automatic_move_scope",
+  KEY_AUTOMATIC_MOVE_STATUS:"automatic_move_status",
 };
 
 export default KEYS;

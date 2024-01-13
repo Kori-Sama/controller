@@ -1,20 +1,20 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 import {
   AndroidOutlined,
-  AppstoreOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
-import type { MenuProps } from "antd";
-import { Breadcrumb, Flex, Layout, Menu, theme } from "antd";
-import { Outlet, useNavigate } from "react-router-dom";
-import groupsStore from "../../store/groups";
-import { autorun, observable } from "mobx";
-import { observer } from "mobx-react";
-import { Button } from "antd";
-import userStore from "../../store/users";
-const { Header, Content, Sider } = Layout;
+  // AppstoreOutlined,
+  // UserOutlined,
+} from "@ant-design/icons"
+import type { MenuProps } from "antd"
+import { Breadcrumb, Layout, Menu, theme } from "antd"
+import { Outlet, useNavigate } from "react-router-dom"
+// import groupsStore from "../../store/groups";
+import { autorun, observable } from "mobx"
+import { observer } from "mobx-react"
+// import { Button } from "antd";
+import userStore from "../../store/users"
+const { Header, Content, Sider } = Layout
 
-type MenuItem = Required<MenuProps>["items"][number];
+type MenuItem = Required<MenuProps>["items"][number]
 
 function getItem(
   label: React.ReactNode,
@@ -27,39 +27,39 @@ function getItem(
     icon,
     children,
     label,
-  } as MenuItem;
+  } as MenuItem
 }
 
-const getGroups = (): MenuItem[] => {
-  return Array.from(groupsStore.groups).map((value, _) =>
-    getItem("组" + value[0], "/groups/" + value[0])
-  );
-};
+// const getGroups = (): MenuItem[] => {
+//   return Array.from(groupsStore.groups).map((value, _) =>
+//     getItem("组" + value[0], "/groups/" + value[0])
+//   );
+// };
 
 const App: React.FC = observer(() => {
   let items = observable([
     getItem("设备", "/devices", <AndroidOutlined />),
-    getItem("群组", "/groups", <AppstoreOutlined />, getGroups()),
-  ]);
+    // getItem("群组", "/groups", <AppstoreOutlined />, getGroups()),
+  ])
 
   autorun(() => {
     userStore.isAdmin
       ? items.replace([
           getItem("设备", "/devices", <AndroidOutlined />),
-          getItem("分组", "/groups", <AppstoreOutlined />, getGroups()),
-          getItem("用户", "/users", <UserOutlined />),
+          // getItem("分组", "/groups", <AppstoreOutlined />, getGroups()),
+          // getItem("用户", "/users", <UserOutlined />),
         ])
       : items.replace([
           getItem("设备", "/devices", <AndroidOutlined />),
-          getItem("分组", "/groups", <AppstoreOutlined />, getGroups()),
-        ]);
-  });
+          // getItem("分组", "/groups", <AppstoreOutlined />, getGroups()),
+        ])
+  })
 
-  const navigate = useNavigate();
-  const [collapsed, setCollapsed] = useState(false);
+  const navigate = useNavigate()
+  const [collapsed, setCollapsed] = useState(false)
   const {
     token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
+  } = theme.useToken()
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -79,7 +79,7 @@ const App: React.FC = observer(() => {
       </Sider>
       <Layout>
         <Header style={{ padding: 0, background: colorBgContainer }}>
-          <Flex
+          {/* <Flex
             justify="flex-end"
             align="center"
             gap="middle"
@@ -90,9 +90,9 @@ const App: React.FC = observer(() => {
               size="large"
               onClick={() => navigate("/login")}
             >
-              登录
+              多选
             </Button>
-          </Flex>
+          </Flex> */}
         </Header>
         <Content style={{ margin: "0 16px" }}>
           <Breadcrumb style={{ margin: "16px 0" }} />
@@ -109,7 +109,7 @@ const App: React.FC = observer(() => {
         </Content>
       </Layout>
     </Layout>
-  );
-});
+  )
+})
 
-export default App;
+export default App

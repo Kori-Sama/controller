@@ -1,21 +1,20 @@
-import { observer } from "mobx-react";
-import { DeviceType } from "../../types/Device";
-import DeviceItem from "../DeviceItem";
-import { Button, Flex } from "antd";
-import groupStore from "../../store/groups";
-import KEYS from "../../types/SocketAPI";
-import MoveButton from "./MoveButton";
-import WipeButton from "./WipeButton";
+import { observer } from "mobx-react"
+import { DeviceType } from "../../types/Device"
+import DeviceItem from "../DeviceItem"
+import { Button, Flex } from "antd"
+import groupStore from "../../store/groups"
+import KEYS from "../../types/SocketAPI"
+import MoveButton from "./MoveButton"
+import WipeButton from "./WipeButton"
 
 const DeviceGroup = ({
   devices,
   groupName,
 }: {
-  devices: DeviceType[];
-  groupName: string | null;
+  devices: DeviceType[]
+  groupName: string | null
 }) => {
-  const list = devices;
-
+  const list = devices
 
   return (
     <>
@@ -48,7 +47,7 @@ const DeviceGroup = ({
         <DeviceItem key={index} device={item} />
       ))}
     </>
-  );
-};
+  )
+}
 
-export default observer(DeviceGroup);
+export default observer(DeviceGroup)

@@ -1,26 +1,26 @@
-import { Dropdown, MenuProps, Space } from "antd";
-import { DownOutlined } from "@ant-design/icons";
-import KEYS from "../../types/SocketAPI";
-import groupStore from "../../store/groups";
-import { DeviceType } from "../../types/Device";
+import { Dropdown, MenuProps, Space } from "antd"
+import { DownOutlined } from "@ant-design/icons"
+import KEYS from "../../types/SocketAPI"
+import groupStore from "../../store/groups"
+import { DeviceType } from "../../types/Device"
 
 const MoveButton = ({
   devices,
   groupName,
 }: {
-  devices: DeviceType[];
-  groupName: string | null;
+  devices: DeviceType[]
+  groupName: string | null
 }) => {
   const handleClick = (value: number[]) => {
-    const startLBA = value[0];
-    const endLBA = value[1];
-    let args: any = {};
-    args[KEYS.ACTION_MOVE_STARTLBA] = startLBA;
-    args[KEYS.ACTION_MOVE_ENDLBA] = endLBA;
-    groupStore.sendMsgGroup(groupName, KEYS.ACTION_MOVE, args);
-  };
+    const startLBA = value[0]
+    const endLBA = value[1]
+    let args: any = {}
+    args[KEYS.ACTION_MOVE_STARTLBA] = startLBA
+    args[KEYS.ACTION_MOVE_ENDLBA] = endLBA
+    groupStore.sendMsgGroup(groupName, KEYS.ACTION_MOVE, args)
+  }
 
-  let items: MenuProps["items"] = [];
+  let items: MenuProps["items"] = []
   for (const key in devices[0].system_list) {
     items.push({
       key,
@@ -29,7 +29,7 @@ const MoveButton = ({
           {key}
         </div>
       ),
-    });
+    })
   }
   return (
     <>
@@ -42,7 +42,7 @@ const MoveButton = ({
         </a>
       </Dropdown>
     </>
-  );
-};
+  )
+}
 
-export default MoveButton;
+export default MoveButton

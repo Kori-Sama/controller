@@ -1,37 +1,37 @@
-import { Button, Input, Modal } from "antd";
-import deviceStore from "../../store/devices";
-import { DeviceProp } from "../../types/Device";
-import KEYS from "../../types/SocketAPI";
-import { useState } from "react";
+import { Button, Input, Modal } from "antd"
+import deviceStore from "../../store/devices"
+import { DeviceProp } from "../../types/Device"
+import KEYS from "../../types/SocketAPI"
+import { useState } from "react"
 
 const WipeButton = ({ device }: DeviceProp) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [startLBA, setStartLBA] = useState(0);
-  const [endLBA, setEndLBA] = useState(0);
-  const [driver, setDriver] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [startLBA, setStartLBA] = useState(0)
+  const [endLBA, setEndLBA] = useState(0)
+  const [driver, setDriver] = useState("")
   const showModal = () => {
-    setIsModalOpen(true);
-  };
+    setIsModalOpen(true)
+  }
 
   const handleOk = () => {
-    let args: any = {};
-    args[KEYS.ACTION_WIPE_STARTLBA] = startLBA;
-    args[KEYS.ACTION_WIPE_ENDLBA] = endLBA;
-    args[KEYS.ACTION_WIPE_DRIVER] = driver;
+    let args: any = {}
+    args[KEYS.ACTION_WIPE_START_BYTE] = startLBA
+    args[KEYS.ACTION_WIPE_END_BYTE] = endLBA
+    args[KEYS.ACTION_WIPE_DRIVER] = driver
 
-    deviceStore.sendMsg(device, KEYS.ACTION_WIPE, args);
-    setIsModalOpen(false);
-    setStartLBA(0);
-    setEndLBA(0);
-    setDriver("");
-  };
+    deviceStore.sendMsg(device, KEYS.ACTION_WIPE, args)
+    setIsModalOpen(false)
+    setStartLBA(0)
+    setEndLBA(0)
+    setDriver("")
+  }
 
   const handleCancel = () => {
-    setIsModalOpen(false);
-    setStartLBA(0);
-    setEndLBA(0);
-    setDriver("");
-  };
+    setIsModalOpen(false)
+    setStartLBA(0)
+    setEndLBA(0)
+    setDriver("")
+  }
   return (
     <>
       <Modal
@@ -61,7 +61,7 @@ const WipeButton = ({ device }: DeviceProp) => {
         清除数据
       </Button>
     </>
-  );
-};
+  )
+}
 
-export default WipeButton;
+export default WipeButton

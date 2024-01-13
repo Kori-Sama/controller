@@ -9,6 +9,7 @@ export interface DeviceType {
     sys_index: number;
     system_list: { [key: string]: number[] };
     belong_groups: string[],
+    automatic_status:string
 }
 
 export interface DeviceProp {

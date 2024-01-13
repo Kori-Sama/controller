@@ -1,25 +1,25 @@
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { LockOutlined, UserOutlined } from "@ant-design/icons"
 import {
   LoginForm,
   ProConfigProvider,
   ProFormText,
-} from "@ant-design/pro-components";
-import { Tabs, theme } from "antd";
-import userStore from "../../store/users";
-import { UserType } from "../../types/User";
-import { useNavigate } from "react-router-dom";
+} from "@ant-design/pro-components"
+import { Tabs, theme } from "antd"
+import userStore from "../../store/users"
+import { UserType } from "../../types/User"
+import { useNavigate } from "react-router-dom"
 
 export default () => {
-  const { token } = theme.useToken();
-  const navigate = useNavigate();
+  const { token } = theme.useToken()
+  const navigate = useNavigate()
 
   const handleFinish = async (data: any) => {
-    const user = data as UserType;
-    const res = await userStore.reqLogin(user);
+    const user = data as UserType
+    const res = await userStore.reqLogin(user)
     if (res === null) {
-      navigate("/devices");
+      navigate("/devices")
     }
-  };
+  }
 
   return (
     <div
@@ -54,7 +54,6 @@ export default () => {
                 fieldProps={{
                   size: "large",
                   prefix: <LockOutlined className={"prefixIcon"} />,
- 
                 }}
                 placeholder="密码"
                 rules={[
@@ -75,5 +74,5 @@ export default () => {
         </div>
       </ProConfigProvider>
     </div>
-  );
-};
+  )
+}

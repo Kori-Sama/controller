@@ -1,16 +1,14 @@
-import {
-  Button,
-  Flex,
-} from "antd";
-import { DeviceProp } from "../../types/Device";
-import deviceStore from "../../store/devices";
-import { observer } from "mobx-react";
-import KEYS from "../../types/SocketAPI";
-import WipeButton from "./WipeButton";
-import MoveButton from "./MoveButton";
+import { Button, Flex } from "antd"
+import { DeviceProp } from "../../types/Device"
+import deviceStore from "../../store/devices"
+import { observer } from "mobx-react"
+import KEYS from "../../types/SocketAPI"
+import WipeButton from "./WipeButton"
+import MoveButton from "./MoveButton"
+import CycleButton from "./CycleButton"
 
 const DeviceController = ({ device }: DeviceProp) => {
-
+  
   return (
     <>
       <Flex justify="space-around" align="center" gap={10}>
@@ -26,11 +24,13 @@ const DeviceController = ({ device }: DeviceProp) => {
         >
           关机
         </Button>
-        <WipeButton device={device}/>
+        <WipeButton device={device} />
         <MoveButton device={device} />
+        
+        <CycleButton device={device} />
       </Flex>
     </>
-  );
-};
+  )
+}
 
-export default observer(DeviceController);
+export default observer(DeviceController)
