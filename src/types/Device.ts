@@ -15,3 +15,4 @@ export interface DeviceType {
 export interface DeviceProp {
   device:DeviceType
 }
+

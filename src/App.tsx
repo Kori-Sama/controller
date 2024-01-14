@@ -1,19 +1,17 @@
-import { FC } from "react";
-import { BrowserRouter  } from "react-router-dom";
-import Router from "./router";
-// import data from "./mock/data.json"
-// import deviceStore from "./store/devices";
-// import { DeviceType } from "./types/Device";
+import { FC } from "react"
+import { BrowserRouter } from "react-router-dom"
+import Router from "./router"
 
-// deviceStore.addToDeviceList(data.at(0) as DeviceType)
+
+
+// data.forEach((item) => deviceStore.addToDeviceList(item))
 
 const App: FC = () => {
-
   return (
     <BrowserRouter>
       <Router />
     </BrowserRouter>
-  );
-};
+  )
+}
 
-export default App;
+export default App

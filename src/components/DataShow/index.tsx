@@ -1,8 +1,7 @@
-import { Badge, Checkbox, Flex } from "antd"
+import { Badge, Flex } from "antd"
 import { DeviceProp } from "../../types/Device"
 import { observer } from "mobx-react"
 import KEYS from "../../types/SocketAPI"
-import groupStore from "../../store/groups"
 
 const DataShow = ({ device }: DeviceProp) => {
   const {
@@ -36,14 +35,7 @@ const DataShow = ({ device }: DeviceProp) => {
       <div>周期指令:{automatic_status}</div>
       <div>状态: {status}</div>
       <Badge status={status === KEYS.STATUS_ONLINE ? "success" : "error"} />
-      <Checkbox onChange={(e)=>{
-        const checked = e.target.checked
-        if(checked) {
-          groupStore.addGroup("selected",device)
-        }else{
-          groupStore.deleteSelected(device) 
-        }
-      }}/>
+
     </Flex>
   )
 }

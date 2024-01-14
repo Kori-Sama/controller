@@ -23,9 +23,12 @@ export class GroupStore {
     }
     this.groups.get(group)?.push(device)
   }
-  deleteSelected(devcie: DeviceType) {
-    if (devcie.belong_groups.at(0) !== "selected") return
-    devcie.belong_groups.pop()
+  deleteSelected(device: DeviceType) {
+    device.belong_groups = []
+    const index = this.groups.get("selected")?.indexOf(device)
+    if(index !== undefined && index !== -1) {
+      this.groups.get("selected")?.splice(index, 1)
+    }
   }
 
   sendMsgGroup(group: string | null, action: string, args: {}) {

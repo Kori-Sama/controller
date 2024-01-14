@@ -71,7 +71,7 @@ export class DeviceStore {
     const system_list: { [key: string]: number[] } =
       jsonObject[KEYS.SYSTEM_LIST]
 
-    const belong_groups: string[] = jsonObject[KEYS.BELONG_GROUPS]
+    const automatic_status = jsonObject[KEYS.KEY_AUTOMATIC_MOVE_STATUS]
 
     const device: DeviceType = {
       id,
@@ -83,8 +83,8 @@ export class DeviceStore {
       data_number,
       sys_index,
       system_list,
-      belong_groups,
-      automatic_status: "disabled",
+      belong_groups: [],
+      automatic_status: automatic_status ?? "disabled",
     }
     const index = this.deviceList.findIndex((item) => item.id === id)
     if (index === -1) {

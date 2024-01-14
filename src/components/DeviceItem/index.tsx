@@ -1,10 +1,11 @@
-import { Collapse, Flex } from "antd";
-import DeviceController from "../DeviceController";
-import { DeviceProp } from "../../types/Device";
-import { observer } from "mobx-react";
-import DataShow from "../DataShow";
+import { Checkbox, Collapse, Flex } from "antd"
+import DeviceController from "../DeviceController"
+import { DeviceProp } from "../../types/Device"
+import { observer } from "mobx-react"
+import DataShow from "../DataShow"
+import groupStore from "../../store/groups"
 
-const DeviceItem = ({device}: DeviceProp) => {
+const DeviceItem = ({ device }: DeviceProp) => {
   // console.log("DeviceItem:",device.group)
 
   return (
@@ -14,13 +15,25 @@ const DeviceItem = ({device}: DeviceProp) => {
           size="large"
           style={{ width: 1200 }}
           items={[
-            { label:<DataShow device={device}/>, children: <DeviceController device={device} /> },
+            {
+              label: <DataShow device={device} />,
+              children: <DeviceController device={device} />,
+            },
           ]}
         />
-        {/* <Badge status={status ? "success" : "error"} /> */}
+        <Checkbox
+          onChange={(e) => {
+            const checked = e.target.checked
+            if (checked) {
+              groupStore.addGroup("selected", device)
+            } else {
+              groupStore.deleteSelected(device)
+            }
+          }}
+        />
       </Flex>
     </>
-  );
-};
+  )
+}
 
-export default observer(DeviceItem);
+export default observer(DeviceItem)
